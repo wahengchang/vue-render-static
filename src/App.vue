@@ -1,30 +1,42 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <v-app id="inspire">
+    <v-toolbar color="indigo" dark fixed app>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-title>Application</v-toolbar-title>
+    </v-toolbar>
+
+    <!-- Secondary navigation bar -->
+    <nav-bar></nav-bar>
+
+    <v-main>
+      <v-container class="align-center justify-center" style="max-width: 960px;">
+        <v-row justify="center">
+          <v-col cols="12" sm="10" md="8">
+            <router-view></router-view>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+    
+    <v-footer color="indigo" app>
+      <span class="white--text">&copy; 2017</span>
+    </v-footer>
+  </v-app>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<script>
+import NavBar from './components/NavComponent.vue'
+
+export default {
+  components: {
+    NavBar
+  },
+  data: () => ({
+    drawer: false
+  }),
+
+  props: {
+    source: String
+  }
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+</script>
