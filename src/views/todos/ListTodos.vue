@@ -1,14 +1,22 @@
 <template>
   <v-container>
-    <v-row align="center" justify="space-between" class="mb-4">
-      <h1 class="text-h4 font-weight-bold">My Todos</h1>
-      <v-btn color="primary" to="/todos/create" icon small>
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-      <v-btn color="primary" to="/todos/categories" small>Category</v-btn>
-      <v-btn color="primary" @click="removeAllTodosAndCategories" icon small>
-        <v-icon>mdi-delete-sweep</v-icon>
-      </v-btn>
+    <v-row align="right" class="mb-4">
+      <v-col cols="6" sm="6" md="6">
+        <h1 class="text-h4 font-weight-bold">My Todos</h1>
+      </v-col>
+      <v-col cols="6" sm="6" md="6">
+
+        <v-btn class="mx-1" color="primary text-caption" to="/todos/create" small prepend-icon="mdi-plus-circle">
+          Todo
+        </v-btn>
+
+        <v-btn class="mx-1"  color="primary text-caption" to="/todos/categories" small prepend-icon="mdi-plus-circle">
+          Category
+        </v-btn>
+        <v-btn class="mx-1"  color="primary text-caption" @click="removeAllTodosAndCategories" small prepend-icon="mdi-delete-circle">
+          Clear All
+        </v-btn>
+      </v-col>
     </v-row>
 
     <v-card v-if="todos.length === 0" class="text-center pa-4">
@@ -31,11 +39,7 @@
               </v-card-text>
             </v-col>
             <v-col cols="12" sm="4" md="3" class="d-flex align-center justify-end pa-4">
-              <v-btn icon @click.stop="toggleComplete(todo)" class="mr-2">
-                <v-icon :color="todo.completed ? 'success' : 'grey'">
-                  {{ todo.completed ? 'mdi-check-circle' : 'mdi-circle-outline' }}
-                </v-icon>
-              </v-btn>
+
               <v-btn icon @click.stop="editTodo(todo.id)" color="primary" class="mr-2">
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
@@ -73,7 +77,7 @@ export default {
     },
     deleteTodo(id) {
       this.todos = this.todos.filter(todo => todo.id !== id);
-      LocalStorageService.delete('todos', id);
+      LocalStorageService.remove('todos', id);
     },
     toggleComplete(todo) {
       todo.completed = !todo.completed;
@@ -86,6 +90,12 @@ export default {
     getCategoryColor(categoryId) {
       // Implement a method to return a color based on the category
       // For example: return ['primary', 'secondary', 'accent'][categoryId % 3];
+    },
+    removeAllTodosAndCategories() {
+      LocalStorageService.save('todos', []);
+      LocalStorageService.save('categories', []);
+      this.todos = [];
+      this.categories = [];
     }
   }
 };
