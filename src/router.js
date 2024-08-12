@@ -9,6 +9,7 @@ import CreateTodo from './views/todos/CreateTodo.vue'
 import EditTodo from './views/todos/EditTodo.vue'
 import ViewTodo from './views/todos/ViewTodo.vue'
 import Category from './views/todos/Category.vue'
+import SystemPage from './views/System.vue'
 
 const routes = [
   {
@@ -27,6 +28,7 @@ const routes = [
   { path: '/todos/categories', name: 'ManageCategories', component: Category },
   { path: '/todos/edit/:id', name: 'EditTodo', component: EditTodo, props: true },
   { path: '/todos/view/:id', name: 'ViewTodo', component: ViewTodo, props: true },
+  { path: '/system', name: 'TodoSystem', component: SystemPage },
 ];
 
 const router = createRouter({

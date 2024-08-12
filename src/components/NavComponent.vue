@@ -5,6 +5,7 @@
         <v-btn text to="/">Home</v-btn>
         <v-btn text to="/about">About</v-btn>
         <v-btn text to="/todos">Todo</v-btn> 
+        <v-btn text to="/system">System</v-btn> 
       </v-toolbar-items>
     </v-toolbar>
   </template>
